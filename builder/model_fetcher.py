@@ -7,6 +7,8 @@ Downloads the model from the URL passed in.
 import shutil
 import requests
 import argparse
+import wget
+
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -33,12 +35,13 @@ def download_model(model_url: str):
     if parsed_url.netloc == "huggingface.co":
         model_id = f"{parsed_url.path.strip('/')}"
     else:
-        downloaded_model = requests.get(model_url, stream=True, timeout=600)
+        wget.download(model_url, './' + MODEL_CACHE_DIR + '/model.safetensors')
+        # downloaded_model = requests.get(model_url, stream=True, timeout=600)
         model_id = "./" + MODEL_CACHE_DIR + '/model.safetensors'
-        with open(model_cache_path / "model.safetensors", "wb") as f:
-            for chunk in downloaded_model.iter_content(chunk_size=1024):
-                if chunk:
-                    f.write(chunk)
+        # with open(model_cache_path / "model.safetensors", "wb") as f:
+        #     for chunk in downloaded_model.iter_content(chunk_size=1024):
+        #         if chunk:
+        #             f.write(chunk)
 
     # StableDiffusionSafetyChecker.from_pretrained(
     #     SAFETY_MODEL_ID,
@@ -64,5 +67,6 @@ parser.add_argument(
 )
 
 if __name__ == "__main__":
-    args = parser.parse_args()
-    download_model(args.model_url)
+    # args = parser.parse_args()
+    # download_model(args.model_url)
+    download_model("https://civitai.com/api/download/models/143906?type=Model")
