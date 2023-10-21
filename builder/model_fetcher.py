@@ -35,7 +35,7 @@ def download_model(model_url: str):
     if parsed_url.netloc == "huggingface.co":
         model_id = f"{parsed_url.path.strip('/')}"
     else:
-        wget.download(model_url, './' + MODEL_CACHE_DIR + '/model.safetensors')
+        # wget.download(model_url, './' + MODEL_CACHE_DIR + '/model.safetensors')
         # downloaded_model = requests.get(model_url, stream=True, timeout=600)
         model_id = "./" + MODEL_CACHE_DIR + '/model.safetensors'
         # with open(model_cache_path / "model.safetensors", "wb") as f:
@@ -48,12 +48,16 @@ def download_model(model_url: str):
     #     cache_dir=model_cache_path,
     # )
 
-    StableDiffusionPipeline.from_pretrained(
-        model_id,
-        variant="fp16",
-        cache_dir=model_cache_path,
-        use_safetensors=True,
+    StableDiffusionPipeline.from_single_file(
+        model_url
     )
+
+    # StableDiffusionPipeline.from_pretrained(
+    #     model_id,
+    #     variant="fp16",
+    #     cache_dir=model_cache_path,
+    #     use_safetensors=True,
+    # )
 
 
 # ---------------------------------------------------------------------------- #
