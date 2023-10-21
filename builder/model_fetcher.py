@@ -34,7 +34,8 @@ def download_model(model_url: str):
         model_id = f"{parsed_url.path.strip('/')}"
     else:
         downloaded_model = requests.get(model_url, stream=True, timeout=600)
-        with open(model_cache_path / "model.zip", "wb") as f:
+        model_id = "./" + MODEL_CACHE_DIR + '/model.safetensors'
+        with open(model_cache_path / "model.safetensors", "wb") as f:
             for chunk in downloaded_model.iter_content(chunk_size=1024):
                 if chunk:
                     f.write(chunk)
@@ -46,7 +47,9 @@ def download_model(model_url: str):
 
     StableDiffusionPipeline.from_pretrained(
         model_id,
+        variant="fp16",
         cache_dir=model_cache_path,
+        use_safetensors=True,
     )
 
 
