@@ -10,7 +10,7 @@ import argparse
 from pathlib import Path
 from urllib.parse import urlparse
 
-from diffusers import StableDiffusionPipeline
+from diffusers import StableDiffusionPipeline, DiffusionPipeline
 from diffusers.pipelines.stable_diffusion.safety_checker import (
     StableDiffusionSafetyChecker,
 )
@@ -39,12 +39,12 @@ def download_model(model_url: str):
                 if chunk:
                     f.write(chunk)
 
-    StableDiffusionSafetyChecker.from_pretrained(
-        SAFETY_MODEL_ID,
-        cache_dir=model_cache_path,
-    )
+    # StableDiffusionSafetyChecker.from_pretrained(
+    #     SAFETY_MODEL_ID,
+    #     cache_dir=model_cache_path,
+    # )
 
-    StableDiffusionPipeline.from_pretrained(
+    DiffusionPipeline.from_pretrained(
         model_id,
         cache_dir=model_cache_path,
     )

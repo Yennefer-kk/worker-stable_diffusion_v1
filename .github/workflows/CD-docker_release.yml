@@ -13,9 +13,9 @@ jobs:
             model_tag: emilianJR/epiCRealism
             model_url: https://huggingface.co/emilianJR/epiCRealism
 
-          - model_name: stable-diffusion-v1-5
-            model_tag: runwayml/stable-diffusion-v1-5
-            model_url: https://huggingface.co/runwayml/stable-diffusion-v1-5
+          # - model_name: stable-diffusion-v1-5
+          #   model_tag: runwayml/stable-diffusion-v1-5
+          #   model_url: https://huggingface.co/runwayml/stable-diffusion-v1-5
 
           # - model_name: anything-v3
           #   model_tag: Linaqruf/anything-v3.0
