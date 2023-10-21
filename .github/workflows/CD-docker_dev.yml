@@ -12,7 +12,7 @@ jobs:
         include:
           - model_name: epiCRealism
             model_tag: emilianJR/epiCRealism
-            model_url: https://huggingface.co/emilianJR/epiCRealism
+            model_url: https://civitai.com/api/download/models/143906?type=Model&format=SafeTensor&size=pruned&fp=fp16
 
           # - model_name: stable-diffusion-v1-5
           #   model_tag: runwayml/stable-diffusion-v1-5
