@@ -69,4 +69,4 @@ parser.add_argument(
 if __name__ == "__main__":
     # args = parser.parse_args()
     # download_model(args.model_url)
-    download_model("https://civitai.com/api/download/models/143906?type=Model")
+    download_model("https://civitai-delivery-worker-prod-2023-10-01.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/81744/model/epicrealism.XNId.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22epicrealism_naturalSinRC1VAE.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=2fea663d76bd24a496545da373d610fc/20231021/us-east-1/s3/aws4_request&X-Amz-Date=20231021T215043Z&X-Amz-SignedHeaders=host&X-Amz-Signature=413d0ffba8fc459f57f37dba57229cd65f291d2aa5f64d0b9c69afd63890e5df")
