@@ -36,28 +36,23 @@ def download_model(model_url: str):
         model_id = f"{parsed_url.path.strip('/')}"
     else:
         # wget.download(model_url, './' + MODEL_CACHE_DIR + '/model.safetensors')
-        # downloaded_model = requests.get(model_url, stream=True, timeout=600)
+        downloaded_model = requests.get(model_url, stream=True, timeout=600)
         model_id = "./" + MODEL_CACHE_DIR + '/model.safetensors'
-        # with open(model_cache_path / "model.safetensors", "wb") as f:
-        #     for chunk in downloaded_model.iter_content(chunk_size=1024):
-        #         if chunk:
-        #             f.write(chunk)
+        with open(model_cache_path / "model.safetensors", "wb") as f:
+            for chunk in downloaded_model.iter_content(chunk_size=1024):
+                if chunk:
+                    f.write(chunk)
 
     # StableDiffusionSafetyChecker.from_pretrained(
     #     SAFETY_MODEL_ID,
     #     cache_dir=model_cache_path,
     # )
 
-    StableDiffusionPipeline.from_single_file(
-        model_url
+    StableDiffusionPipeline.from_pretrained(
+        model_id,
+        cache_dir=model_cache_path,
+        use_safetensors=True,
     )
-
-    # StableDiffusionPipeline.from_pretrained(
-    #     model_id,
-    #     variant="fp16",
-    #     cache_dir=model_cache_path,
-    #     use_safetensors=True,
-    # )
 
 
 # ---------------------------------------------------------------------------- #
@@ -71,6 +66,6 @@ parser.add_argument(
 )
 
 if __name__ == "__main__":
-    # args = parser.parse_args()
-    # download_model(args.model_url)
-    download_model("https://civitai-delivery-worker-prod-2023-10-01.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/81744/model/epicrealism.XNId.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22epicrealism_naturalSinRC1VAE.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=2fea663d76bd24a496545da373d610fc/20231021/us-east-1/s3/aws4_request&X-Amz-Date=20231021T215043Z&X-Amz-SignedHeaders=host&X-Amz-Signature=413d0ffba8fc459f57f37dba57229cd65f291d2aa5f64d0b9c69afd63890e5df")
+    args = parser.parse_args()
+    download_model(args.model_url)
+    # download_model("https://civitai-delivery-worker-prod-2023-10-01.5ac0637cfd0766c97916cefa3764fbdf.r2.cloudflarestorage.com/81744/model/epicrealism.XNId.safetensors?X-Amz-Expires=86400&response-content-disposition=attachment%3B%20filename%3D%22epicrealism_naturalSinRC1VAE.safetensors%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=2fea663d76bd24a496545da373d610fc/20231021/us-east-1/s3/aws4_request&X-Amz-Date=20231021T215043Z&X-Amz-SignedHeaders=host&X-Amz-Signature=413d0ffba8fc459f57f37dba57229cd65f291d2aa5f64d0b9c69afd63890e5df")
