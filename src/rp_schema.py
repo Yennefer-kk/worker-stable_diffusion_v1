@@ -1,7 +1,7 @@
 INPUT_SCHEMA = {
     'prompt': {
         'type': str,
-        'required': True
+        'required': False
     },
     'negative_prompt': {
         'type': str,
