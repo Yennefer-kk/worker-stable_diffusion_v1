@@ -12,13 +12,13 @@ INPUT_SCHEMA = {
         'type': int,
         'required': False,
         'default': 512,
-        'constraints': lambda width: width in [128, 256, 384, 448, 512, 576, 640, 704, 768]
+        'constraints': lambda width: width in [128, 256, 384, 448, 512, 576, 640, 704, 768, 864]
     },
     'height': {
         'type': int,
         'required': False,
         'default': 512,
-        'constraints': lambda height: height in [128, 256, 384, 448, 512, 576, 640, 704, 768]
+        'constraints': lambda height: height in [128, 256, 384, 448, 512, 576, 640, 704, 768, 1448]
     },
     'init_image': {
         'type': str,
@@ -33,7 +33,7 @@ INPUT_SCHEMA = {
     'prompt_strength': {
         'type': float,
         'required': False,
-        'default': 0.8,
+        'default': 0.55,
         'constraints': lambda prompt_strength: 0 <= prompt_strength <= 1
     },
     'num_outputs': {
@@ -51,13 +51,13 @@ INPUT_SCHEMA = {
     'guidance_scale': {
         'type': float,
         'required': False,
-        'default': 7.5,
+        'default': 12,
         'constraints': lambda guidance_scale: 0 < guidance_scale < 20
     },
     'scheduler': {
         'type': str,
         'required': False,
-        'default': 'K-LMS',
+        'default': 'DPM-S',
         'constraints': lambda scheduler: scheduler in ['DDIM', 'DDPM', 'DPM-M', 'DPM-S',  'EULER-A', 'EULER-D', 'HEUN', 'IPNDM', 'KDPM2-A', 'KDPM2-D', 'PNDM', 'K-LMS', 'KLMS']
     },
     'seed': {
