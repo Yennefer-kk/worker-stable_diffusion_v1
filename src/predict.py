@@ -139,8 +139,6 @@ class Predictor:
         if (lora is None) and self.lora_loaded:
             extra_kwargs['cross_attention_kwargs'] = {"scale": 0}
 
-        prompt = None
-
         generator = torch.Generator("cuda").manual_seed(seed)
         output = pipe(
             prompt=[prompt] * num_outputs if prompt is not None else None,
