@@ -117,7 +117,7 @@ class Predictor:
         elif init_image:
             pipe = self.img2img_pipe
             extra_kwargs = {
-                "init_image": Image.open(init_image).convert("RGB"),
+                "image": Image.open(init_image).convert("RGB"),
                 "strength": prompt_strength,
             }
         else:
