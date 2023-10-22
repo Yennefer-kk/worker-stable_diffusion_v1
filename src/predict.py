@@ -97,10 +97,10 @@ class Predictor:
         if seed is None:
             seed = int.from_bytes(os.urandom(2), "big")
 
-        if width * height > 786432:
-            raise ValueError(
-                "Maximum size is 1024x768 or 768x1024 pixels, because of memory limits."
-            )
+        # if width * height > 786432:
+        #     raise ValueError(
+        #         "Maximum size is 1024x768 or 768x1024 pixels, because of memory limits."
+        #     )
 
         extra_kwargs = {}
         if mask:
