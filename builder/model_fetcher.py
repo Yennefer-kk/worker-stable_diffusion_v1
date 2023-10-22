@@ -7,7 +7,6 @@ Downloads the model from the URL passed in.
 import shutil
 import requests
 import argparse
-import wget
 
 from pathlib import Path
 from urllib.parse import urlparse
