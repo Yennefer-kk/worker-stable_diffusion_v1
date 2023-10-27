@@ -53,7 +53,7 @@ class Predictor:
         print("Loading pipeline...")
 
         self.txt2img_pipe = StableDiffusionPipeline.from_pretrained(
-            "epicrealism_naturalSinRC1VAE"
+            "epicrealism_naturalSinRC1VAE",
             # self.model_tag,
             safety_checker=None,
             cache_dir=MODEL_CACHE,
