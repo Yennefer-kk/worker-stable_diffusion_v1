@@ -53,6 +53,7 @@ def download_model(model_url: str):
     # print(datetime.datetime.now())
     StableDiffusionPipeline.from_pretrained(
         MODEL_DIR,
+        local_files_only=True,
         use_safetensors=True,
         torch_dtype=torch.float16
     )

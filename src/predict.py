@@ -44,7 +44,8 @@ class Predictor:
         '''
         Initialize the Predictor class
         '''
-        self.model_tag = model_tag
+        # self.model_tag = model_tag
+        self.model_tag = "epicrealism_naturalSinRC1VAE"
 
     def setup(self):
         '''
@@ -56,7 +57,7 @@ class Predictor:
             "epicrealism_naturalSinRC1VAE",
             # self.model_tag,
             safety_checker=None,
-            cache_dir=MODEL_CACHE,
+            # cache_dir=MODEL_CACHE,
             local_files_only=True,
             torch_dtype=torch.float16,
         ).to("cuda")
