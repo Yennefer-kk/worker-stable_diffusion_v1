@@ -4,9 +4,11 @@ RunPod | serverless-ckpt-template | model_fetcher.py
 Downloads the model from the URL passed in.
 '''
 
+import datetime
 import shutil
 import requests
 import argparse
+import torch
 
 from pathlib import Path
 from urllib.parse import urlparse
@@ -18,6 +20,7 @@ from diffusers.pipelines.stable_diffusion.safety_checker import (
 
 SAFETY_MODEL_ID = "CompVis/stable-diffusion-safety-checker"
 MODEL_CACHE_DIR = "diffusers-cache"
+MODEL_DIR = "epicrealism_naturalSinRC1VAE"
 
 
 def download_model(model_url: str):
@@ -25,32 +28,52 @@ def download_model(model_url: str):
     Downloads the model from the URL passed in.
     '''
     model_cache_path = Path(MODEL_CACHE_DIR)
-    if model_cache_path.exists():
-        shutil.rmtree(model_cache_path)
-    model_cache_path.mkdir(parents=True, exist_ok=True)
+    # if model_cache_path.exists():
+    #     shutil.rmtree(model_cache_path)
+    # model_cache_path.mkdir(parents=True, exist_ok=True)
 
-    # Check if the URL is from huggingface.co, if so, grab the model repo id.
-    parsed_url = urlparse(model_url)
-    if parsed_url.netloc == "huggingface.co":
-        model_id = f"{parsed_url.path.strip('/')}"
-    else:
-        downloaded_model = requests.get(model_url, stream=True, timeout=600)
-        model_id = "./" + MODEL_CACHE_DIR + '/model.safetensors'
-        with open(model_cache_path / "model.safetensors", "wb") as f:
-            for chunk in downloaded_model.iter_content(chunk_size=1024):
-                if chunk:
-                    f.write(chunk)
+    # # Check if the URL is from huggingface.co, if so, grab the model repo id.
+    # parsed_url = urlparse(model_url)
+    # if parsed_url.netloc == "huggingface.co":
+    #     model_id = f"{parsed_url.path.strip('/')}"
+    # else:
+    #     downloaded_model = requests.get(model_url, stream=True, timeout=600)
+    #     model_id = "./" + MODEL_CACHE_DIR + '/model.safetensors'
+    #     with open(model_cache_path / "model.safetensors", "wb") as f:
+    #         for chunk in downloaded_model.iter_content(chunk_size=1024):
+    #             if chunk:
+    #                 f.write(chunk)
 
     StableDiffusionSafetyChecker.from_pretrained(
         SAFETY_MODEL_ID,
         cache_dir=model_cache_path,
     )
 
+    # 40s
+    # print(datetime.datetime.now())
     StableDiffusionPipeline.from_pretrained(
-        model_id,
-        cache_dir=model_cache_path,
+        MODEL_DIR,
         use_safetensors=True,
+        torch_dtype=torch.float16
     )
+    # print(datetime.datetime.now())
+
+    # WARNING: cost 1 minute, slow implementation
+    # print(datetime.datetime.now())
+    # StableDiffusionPipeline.from_single_file(
+    #     model_path,
+    #     cache_dir=model_cache_path,
+    #     use_safetensors=True,
+    #     torch_dtype=torch.float16
+    # )
+    # print(datetime.datetime.now())
+
+
+    # StableDiffusionPipeline.from_pretrained(
+    #     model_id,
+    #     cache_dir=model_cache_path,
+    #     use_safetensors=True,
+    # )
 
 
 # ---------------------------------------------------------------------------- #
