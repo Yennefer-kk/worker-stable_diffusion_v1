@@ -52,7 +52,7 @@ RUN pip install --no-cache-dir -r /requirements.txt && \
 # diffusers-cache
 RUN wget https://civitai.com/api/download/models/143906 --content-disposition
 # RUN wget https://raw.githubusercontent.com/huggingface/diffusers/v0.21.0/scripts/convert_original_stable_diffusion_to_diffusers.py
-RUN python convert_original_sd_to_diffuser.py --checkpoint_path epicrealism_naturalSinRC1VAE.safetensors --dump_path epicrealism_naturalSinRC1VAE/ --from_safetensors
+RUN python ./convert_original_sd_to_diffuser.py --checkpoint_path epicrealism_naturalSinRC1VAE.safetensors --dump_path epicrealism_naturalSinRC1VAE/ --from_safetensors
 
 # Fetch the model
 COPY builder/model_fetcher.py /model_fetcher.py
